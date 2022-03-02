@@ -10,3 +10,7 @@ enable_the_service: true
 
 #
 cluster_name: 'teleport-via-ansible'
+
+#
+tls_key_file: '/etc/pki/tls/private/teleport-server.key'
+tls_cert_file: '/etc/pki/tls/private/teleport-server.crt'
