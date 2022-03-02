@@ -1,6 +1,14 @@
 ---
 # configure_and_start_teleport/tasks/main.yml
 
+- name: 'create directory /var/lib/teleport/'
+  file:
+    path: '/var/lib/teleport/'
+    state: 'directory'
+    owner: 'root'
+    group: 'root'
+    mode: '0750'
+
 - name: 'Create the teleport.yaml'
   template:
     src: 'teleport.yaml.j2'
