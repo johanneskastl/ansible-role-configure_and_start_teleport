@@ -56,7 +56,7 @@ proxy_service:
   https_keypairs:
   - key_file: {{ tls_key_file }}
     cert_file: {{ tls_cert_file }}
-  acme: {}
+  acme: {{ proxy_acme }}
 {% else %}
 proxy_service:
   enabled: "no"
