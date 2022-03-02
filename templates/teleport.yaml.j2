@@ -21,8 +21,12 @@ auth_service:
     {{ auth_setting_name }}: {{ auth_setting_value }}
 {% endfor %}
 {% endif %}
+{% if auth_service_tokens is defined %}
   tokens:
-    - "node:very_insecure_token_that_should_not_be_used"
+{% for token in auth_service_tokens %}
+    - {{ token }}
+{% endfor %}
+{% endif %}
 {% else %}
 auth_service:
   enabled: "no"
