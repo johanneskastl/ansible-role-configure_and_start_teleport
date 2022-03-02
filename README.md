@@ -52,12 +52,63 @@ Dependencies
 
 None
 
-Example Playbook
+Example Playbook Server
 ----------------
 
-    - hosts: servers
-      roles:
-        - { role: 'johanneskastl.configure_and_start_teleport' }
+```
+- hosts: server
+  roles:
+    - role: 'johanneskastl.configure_and_start_teleport'
+      vars:
+        cluster_name: 'teleport_with_vagrant_libvirt'
+        enable_auth_service: true
+        enable_proxy_service: true
+        enable_ssh_service: true
+        enable_app_service: false
+        auth_service_authentication:
+          second_factor: 'off'
+        auth_service_tokens:
+          - '"node:very_insecure_token_that_should_not_be_used"'
+        labels:
+            env: 'example'
+            type: 'server'
+        commands:
+          - name: 'hostname'
+            command: '[hostname]'
+            period: '1m0s'
+          - name: 'operating_system'
+            command: ["bash", "-c", "awk -F'=' '/^PRETTY/ {print $2}' /etc/os-release"]
+            period: '30m'
+```
+
+Example Playbook Nodes
+----------------
+
+```
+- hosts: nodes
+  roles:
+    - role: 'johanneskastl.configure_and_start_teleport'
+      vars:
+        enable_auth_service: false
+        enable_proxy_service: false
+        enable_ssh_service: true
+        enable_app_service: false
+        auth_token: '"very_insecure_token_that_should_not_be_used"'
+        auth_servers:
+          - '192.168.1.2:443'
+        labels:
+            env: 'example'
+            type: 'node'
+        commands:
+          - name: 'hostname'
+            command: '[hostname]'
+            period: '1m0s'
+          - name: 'operating_system'
+            command: '["bash", "-c", "awk -F''='' ''/^PRETTY/ {print $2}'' /etc/os-release"]'
+            period: '30m'
+```
+
+Note: For the sake of simplicity the auth_server is shown as a static IP. It would be preferable to get that from a variable in Ansible, e.g. `hostvars['teleport-server']['ansible_default_ipv4']['address']` or similar. And do not forget to add the port `...:443` at the end...
 
 License
 -------
