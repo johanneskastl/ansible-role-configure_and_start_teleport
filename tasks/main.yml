@@ -17,3 +17,10 @@
     state: 'started'
   when:
     - 'start_the_service | bool'
+
+- name: 'Enable the teleport service'
+  service:
+    name: "{{ systemd_unit_name }}"
+    enabled: 'true'
+  when:
+    - 'enable_the_service | bool'
