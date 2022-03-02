@@ -7,6 +7,9 @@ teleport:
     severity: {{ log_severity }}
     format:
       output: {{ log_format_output }}
+{% if auth_token is defined %}
+  auth_token: {{ auth_token }}
+{% endif %}
   ca_pin: []
   diag_addr: ""
 {% if enable_auth_service | bool %}
