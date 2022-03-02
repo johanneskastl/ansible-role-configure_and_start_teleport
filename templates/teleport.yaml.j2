@@ -15,8 +15,12 @@ auth_service:
   listen_addr: {{ teleport_auth_listen_address | default('0.0.0.0:3025') }}
   cluster_name: {{ cluster_name }}
   proxy_listener_mode: {{ proxy_listener_mode }}
+{% if auth_service_authentication is defined %}
   authentication:
-    second_factor: off
+{% for auth_setting_name, auth_setting_value in auth_service_authentication.items() %}
+    {{ auth_setting_name }}: {{ auth_setting_value }}
+{% endfor %}
+{% endif %}
   tokens:
     - "node:very_insecure_token_that_should_not_be_used"
 {% else %}
