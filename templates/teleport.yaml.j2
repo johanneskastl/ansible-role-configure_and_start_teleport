@@ -74,3 +74,10 @@ proxy_service:
 proxy_service:
   enabled: "no"
 {% endif %}
+{% if enable_app_service | bool %}
+app_service:
+  enabled: "yes"
+{% else %}
+app_service:
+  enabled: "no"
+{% endif %}
