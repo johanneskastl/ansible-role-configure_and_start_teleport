@@ -2,6 +2,7 @@
 # configure_and_start_teleport/defaults/main.yml
 
 systemd_unit_name: 'teleport.service'
+teleport_data_directory: '/var/lib/teleport/'
 
 #
 start_the_service: true
