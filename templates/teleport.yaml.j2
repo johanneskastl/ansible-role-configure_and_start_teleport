@@ -3,10 +3,10 @@ teleport:
   nodename: {{ inventory_hostname }}
   data_dir: {{ teleport_data_directory }}
   log:
-    output: stderr
-    severity: INFO
+    output: {{ log_output }}
+    severity: {{ log_severity }}
     format:
-      output: text
+      output: {{ log_format_output }}
   ca_pin: []
   diag_addr: ""
 {% if enable_auth_service | bool %}
@@ -28,16 +28,18 @@ ssh_service:
   enabled: "yes"
 {% if labels is defined %}
   labels:
-    env: example
-    type: server
+{% for label in labels %}
+    {{ label.name }}: {{ label.value }}
+{% endfor %}
 {% endif %}
+{% if commands is defined %}
   commands:
-  - name: hostname
-    command: [hostname]
-    period: 1m0s
-  - name: operating_system
-    command: ["bash", "-c", "awk -F'=' '/^PRETTY/ {print $2}' /etc/os-release"]
-    period: 30m
+{% for command in commands %}
+  - name: {{ command.name }}
+    command: {{ command.command }}
+    period: {{ command.period }}
+{% endfor %}
+{% endif %}
 {% else %}
 ssh_service:
   enabled: "no"
