@@ -1,0 +1,37 @@
+galaxy_info:
+  role_name: 'configure_and_start_teleport'
+  author: 'Johannes Kastl'
+  description: 'Configure and start a teleport server or node'
+  company: 'B1 Systems GmbH'
+
+  license: 'BSD-3-Clause'
+
+  min_ansible_version: 2.4
+
+  platforms:
+  - name: EL
+    versions:
+    - 7
+    - 8
+  - name: Debian
+    versions:
+    - all
+  - name: Fedora
+    versions:
+    - all
+  - name: opensuse
+    versions:
+    - all
+  - name: Rocky
+    versions:
+    - 8
+  - name: SLES
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+
+  galaxy_tags: []
+
+dependencies: []
