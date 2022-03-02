@@ -1,0 +1,12 @@
+---
+# configure_and_start_teleport/tasks/main.yml
+
+- name: 'Create the teleport.yaml'
+  template:
+    src: 'teleport.yaml.j2'
+    dest: '/etc/teleport.yaml'
+    owner: 'root'
+    group: 'root'
+    mode: '0600'
+  notify:
+    - 'Restart the teleport service'
