@@ -28,8 +28,8 @@ ssh_service:
   enabled: "yes"
 {% if labels is defined %}
   labels:
-{% for label in labels %}
-    {{ label.name }}: {{ label.value }}
+{% for labelname, labelvalue in labels.items() %}
+    {{ labelname }}: {{ labelvalue }}
 {% endfor %}
 {% endif %}
 {% if commands is defined %}
