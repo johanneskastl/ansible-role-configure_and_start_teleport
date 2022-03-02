@@ -1,0 +1,4 @@
+---
+# configure_and_start_teleport/defaults/main.yml
+
+systemd_unit_name: 'teleport.service'
