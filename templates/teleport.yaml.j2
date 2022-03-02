@@ -81,3 +81,10 @@ app_service:
 app_service:
   enabled: "no"
 {% endif %}
+{% if enable_kubernetes_service | bool %}
+kubernetes_service:
+  enabled: "yes"
+{% else %}
+kubernetes_service:
+  enabled: "no"
+{% endif %}
