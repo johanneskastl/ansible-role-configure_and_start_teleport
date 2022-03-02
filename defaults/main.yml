@@ -7,3 +7,6 @@ teleport_data_directory: '/var/lib/teleport/'
 #
 start_the_service: true
 enable_the_service: true
+
+#
+cluster_name: 'teleport-via-ansible'
