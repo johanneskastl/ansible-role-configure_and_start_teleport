@@ -1,0 +1,57 @@
+version: v2
+teleport:
+  nodename: {{ inventory_hostname }}
+  data_dir: {{ teleport_data_directory }}
+  log:
+    output: stderr
+    severity: INFO
+    format:
+      output: text
+  ca_pin: []
+  diag_addr: ""
+{% if enable_auth_service | bool %}
+auth_service:
+  enabled: "yes"
+  listen_addr: {{ teleport_auth_listen_address | default('0.0.0.0:3025') }}
+  cluster_name: {{ cluster_name }}
+  proxy_listener_mode: {{ proxy_listener_mode }}
+  authentication:
+    second_factor: off
+  tokens:
+    - "node:very_insecure_token_that_should_not_be_used"
+{% else %}
+auth_service:
+  enabled: "no"
+{% endif %}
+{% if enable_ssh_service | bool %}
+ssh_service:
+  enabled: "yes"
+{% if labels is defined %}
+  labels:
+    env: example
+    type: server
+{% endif %}
+  commands:
+  - name: hostname
+    command: [hostname]
+    period: 1m0s
+  - name: operating_system
+    command: ["bash", "-c", "awk -F'=' '/^PRETTY/ {print $2}' /etc/os-release"]
+    period: 30m
+{% else %}
+ssh_service:
+  enabled: "no"
+{% endif %}
+{% if enable_proxy_service | bool %}
+proxy_service:
+  enabled: "yes"
+  web_listen_addr: {{ teleport_proxy_listen_address | default('0.0.0.0:443') }}
+  public_addr: {{ teleport_public_address | default(ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0])) }}:443
+  https_keypairs:
+  - key_file: {{ tls_key_file }}
+    cert_file: {{ tls_cert_file }}
+  acme: {}
+{% else %}
+proxy_service:
+  enabled: "no"
+{% endif %}
