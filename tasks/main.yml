@@ -1,9 +1,9 @@
 ---
 # configure_and_start_teleport/tasks/main.yml
 
-- name: 'create directory /var/lib/teleport/'
+- name: "create directory {{ teleport_data_directory }}"
   file:
-    path: '/var/lib/teleport/'
+    path: "{{ teleport_data_directory }}"
     state: 'directory'
     owner: 'root'
     group: 'root'
