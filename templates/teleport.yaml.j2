@@ -16,7 +16,7 @@ teleport:
     - {{ server }}
 {% endfor %}
 {% endif %}
-  ca_pin: []
+  ca_pin: {{ ca_pin }}
   diag_addr: ""
 {% if enable_auth_service | bool %}
 auth_service:
