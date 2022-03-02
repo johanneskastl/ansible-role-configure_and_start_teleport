@@ -11,8 +11,9 @@
   notify:
     - 'Restart the teleport service'
 
-- name: 'Start and enable the teleport service'
+- name: 'Start the teleport service'
   service:
     name: "{{ systemd_unit_name }}"
     state: 'started'
-    enabled: 'true'
+  when:
+    - 'start_the_service | bool'
