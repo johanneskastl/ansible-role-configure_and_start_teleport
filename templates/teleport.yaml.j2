@@ -88,3 +88,10 @@ kubernetes_service:
 kubernetes_service:
   enabled: "no"
 {% endif %}
+{% if enable_db_service | bool %}
+db_service:
+  enabled: "yes"
+{% else %}
+db_service:
+  enabled: "no"
+{% endif %}
