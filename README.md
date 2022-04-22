@@ -1,3 +1,5 @@
+![Ansible Lint](https://github.com/johanneskastl/ansible-role-configure_and_start_teleport/workflows/Ansible%20Lint/badge.svg)
+
 configure_and_start_teleport
 =========
 
