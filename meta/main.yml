@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: 'configure_and_start_teleport'
+  namespace: 'johanneskastl'
   author: 'Johannes Kastl'
   description: 'Configure and start a teleport server or node'
   company: 'B1 Systems GmbH'
