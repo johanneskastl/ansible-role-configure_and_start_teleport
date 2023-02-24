@@ -2,7 +2,7 @@
 # configure_and_start_teleport/tasks/main.yml
 
 - name: "create directory {{ teleport_data_directory }}"
-  file:
+  ansible.builtin.file:
     path: "{{ teleport_data_directory }}"
     state: 'directory'
     owner: 'root'
@@ -10,7 +10,7 @@
     mode: '0750'
 
 - name: 'Create the teleport.yaml'
-  template:
+  ansible.builtin.template:
     src: 'teleport.yaml.j2'
     dest: '/etc/teleport.yaml'
     owner: 'root'
@@ -20,14 +20,14 @@
     - 'Restart the teleport service'
 
 - name: 'Start the teleport service'
-  service:
+  ansible.builtin.service:
     name: "{{ systemd_unit_name }}"
     state: 'started'
   when:
     - 'start_the_service | bool'
 
 - name: 'Enable the teleport service'
-  service:
+  ansible.builtin.service:
     name: "{{ systemd_unit_name }}"
     enabled: 'true'
   when:
