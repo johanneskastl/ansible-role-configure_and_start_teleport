@@ -1,7 +1,7 @@
 ---
 # configure_and_start_teleport/tasks/main.yml
 
-- name: "create directory {{ teleport_data_directory }}"
+- name: "Create directory {{ teleport_data_directory }}"
   ansible.builtin.file:
     path: "{{ teleport_data_directory }}"
     state: 'directory'
