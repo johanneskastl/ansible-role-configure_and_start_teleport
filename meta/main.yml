@@ -3,7 +3,6 @@ galaxy_info:
   namespace: 'johanneskastl'
   author: 'Johannes Kastl'
   description: 'Configure and start a teleport server or node'
-  company: 'B1 Systems GmbH'
 
   license: 'BSD-3-Clause'
 
